@@ -9,7 +9,7 @@ char  *ft_strrchr(const char  *s, int c)
 	len = ft_strlen(s);
 	trouve  = 0;
 	i = len;
-	while (i > 0)
+	while (i >= 0)
 	{
 		if (s[i] == (char)c)
 		{
