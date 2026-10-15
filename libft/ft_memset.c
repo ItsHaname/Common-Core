@@ -14,5 +14,15 @@
 
 void	*memset(void *s, int c, size_t n)
 {
+	unsigned char *h;
+	h = (unsigned char)s;
+	int i = 0;
+	while(i <=  n)
+	{
+		h[i++] = c
+	}
+	return  h;
+}
+
 
 

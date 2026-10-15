@@ -9,4 +9,4 @@ int isalnum(int c);
 /*Manipulation des string*/
 size_t	ft_strlen(const char *s);
 void	*memset(void *s, int c, size_t n);
-
+#endif
