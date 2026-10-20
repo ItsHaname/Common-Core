@@ -5,17 +5,16 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: haait-ba <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/10/13 13:00:14 by haait-ba          #+#    #+#             */
-/*   Updated: 2026/10/13 13:04:45 by haait-ba         ###   ########.fr       */
+/*   Created: 2026/10/19 22:00:00 by haait-ba          #+#    #+#             */
+/*   Updated: 2026/10/19 22:00:00 by haait-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
- int	ft_isprint(int c)
+int	ft_isprint(int c)
 {
 	if (c >= 32 && c <= 126)
-		return 1;
-	return 1;
+		return (1);
+	return (0);
 }
-	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          i

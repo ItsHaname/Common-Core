@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: haait-ba <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/10/13 13:05:55 by haait-ba          #+#    #+#             */
-/*   Updated: 2026/10/13 13:42:56 by haait-ba         ###   ########.fr       */
+/*   Created: 2026/10/19 22:00:00 by haait-ba          #+#    #+#             */
+/*   Updated: 2026/10/19 22:00:00 by haait-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 size_t	ft_strlen(const char *s)
 {
-	size_t	len;
+	size_t	i;
 
-	len = 0;
-	while(s[len])
-		len++;	
-	return (len);
+	i = 0;
+	while (s[i])
+		i++;
+	return (i);
 }

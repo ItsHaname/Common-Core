@@ -5,16 +5,16 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: haait-ba <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/10/13 12:58:32 by haait-ba          #+#    #+#             */
-/*   Updated: 2026/10/13 12:59:32 by haait-ba         ###   ########.fr       */
+/*   Created: 2026/10/19 22:00:00 by haait-ba          #+#    #+#             */
+/*   Updated: 2026/10/19 22:00:00 by haait-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	isascii(int c)
+int	ft_isascii(int c)
 {
 	if (c >= 0 && c <= 127)
-		return 1;
-	return 0;
+		return (1);
+	return (0);
 }

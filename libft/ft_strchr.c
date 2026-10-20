@@ -1,27 +1,29 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strchr.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: haait-ba <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/10/19 22:00:00 by haait-ba          #+#    #+#             */
+/*   Updated: 2026/10/19 22:00:00 by haait-ba         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
 
 char	*ft_strchr(const char *s, int c)
 {
-	int i;
-	int trouve;
+	size_t	i;
 
-	trouve  = 0;
 	i = 0;
 	while (s[i])
 	{
-		if (s[i] == (char)c)
-		{
-			trouve  = 1;
-			break;
-		}
+		if ((char)c == s[i])
+			return ((char *)&s[i]);
 		i++;
 	}
-	if((char)c == '\0')
-		return (char*) &s[i];
-
-	if (trouve == 1)
-		return (char *)&s[i];
-	else
-		return NULL;
+	if ((char)c == '\0')
+		return ((char *)&s[i]);
+	return (NULL);
 }
-

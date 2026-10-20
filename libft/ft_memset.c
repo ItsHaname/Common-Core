@@ -5,24 +5,38 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: haait-ba <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/10/13 13:44:15 by haait-ba          #+#    #+#             */
-/*   Updated: 2026/10/13 13:59:29 by haait-ba         ###   ########.fr       */
+/*   Created: 2026/10/19 22:00:00 by haait-ba          #+#    #+#             */
+/*   Updated: 2026/10/19 22:00:00 by haait-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*memset(void *s, int c, size_t n)
+void	*ft_memset(void *s, int c, size_t n)
 {
-	unsigned char *h;
-	h = (unsigned char)s;
-	int i = 0;
-	while(i <=  n)
+	unsigned char	*string;
+	size_t			i;
+
+	i = 0;
+	string = (unsigned char *)s;
+	while (i < n)
 	{
-		h[i++] = c
+		string[i] = (char)c;
+		i++;
 	}
-	return  h;
+	return (string);
 }
 
+#include <stdio.h>
+
+int main() {
+	int a ;
+	     
+
+	// 42 
 
 
+	1337 //
+	ft_memset(&a , 42 , 1 );
+	printf("%d\n" , a);
+}

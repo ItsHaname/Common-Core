@@ -5,16 +5,16 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: haait-ba <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/10/13 12:46:31 by haait-ba          #+#    #+#             */
-/*   Updated: 2026/10/13 12:53:51 by haait-ba         ###   ########.fr       */
+/*   Created: 2026/10/19 22:00:00 by haait-ba          #+#    #+#             */
+/*   Updated: 2026/10/19 22:00:00 by haait-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#inculde "libft.h"
 
-int	isdigit(int c)
+#include "libft.h"
+
+int	ft_isdigit(int c)
 {
-	if (c >= 0 && c <= 9)
-		return 1;
-	return 0;
+	if (c >= '0' && c <= '9')
+		return (1);
+	return (0);
 }
-
