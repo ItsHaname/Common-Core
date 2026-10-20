@@ -56,64 +56,12 @@
 
 ---
 
-## 📚 Zoom sur Libft
 
-<div align="center">
 
-<img src="https://img.shields.io/badge/fonctions-43-00BABC?style=flat-square" alt="43 fonctions" />
-<img src="https://img.shields.io/badge/bonus-listes%20cha%C3%AEn%C3%A9es-00BABC?style=flat-square" alt="Bonus" />
-<img src="https://img.shields.io/badge/sortie-libft.a-060b12?style=flat-square" alt="libft.a" />
-
-</div>
-
-<details>
-<summary><b>🔹 Partie 1 — libc (23)</b></summary>
-
-`ft_isalpha` `ft_isdigit` `ft_isalnum` `ft_isascii` `ft_isprint` `ft_toupper` `ft_tolower`
-`ft_strlen` `ft_strlcpy` `ft_strlcat` `ft_strchr` `ft_strrchr` `ft_strncmp` `ft_strnstr` `ft_strdup` `ft_atoi`
-`ft_memset` `ft_bzero` `ft_memcpy` `ft_memmove` `ft_memchr` `ft_memcmp` `ft_calloc`
-
-</details>
-
-<details>
-<summary><b>🔹 Partie 2 — utilitaires (11)</b></summary>
-
-`ft_substr` `ft_strjoin` `ft_strtrim` `ft_split` `ft_itoa` `ft_strmapi` `ft_striteri`
-`ft_putchar_fd` `ft_putstr_fd` `ft_putendl_fd` `ft_putnbr_fd`
-
-</details>
-
-<details>
-<summary><b>🔹 Bonus — listes chaînées (9)</b></summary>
-
-`ft_lstnew` `ft_lstadd_front` `ft_lstadd_back` `ft_lstsize` `ft_lstlast`
-`ft_lstdelone` `ft_lstclear` `ft_lstiter` `ft_lstmap`
-
-</details>
-
-```bash
-cd libft && make        # génère libft.a
-cc main.c -L. -lft      # l'utiliser dans un projet
-```
 
 ---
 
-## 📂 Structure du dépôt
-
-```
-Common-Core/
-├── assets/
-│   └── holy-graph.svg   # Graphe de mes projets 42
-├── libft/               # Cercle 0 — ma bibliothèque C
-│   ├── Makefile
-│   ├── libft.h
-│   └── ft_*.c
-└── README.md
-```
-
----
-
-## 🛠️ Compétences
+## Compétences
 
 <div align="center">
 
