@@ -26,17 +26,3 @@ void	*ft_memset(void *s, int c, size_t n)
 	}
 	return (string);
 }
-
-#include <stdio.h>
-
-int main() {
-	int a ;
-	     
-
-	// 42 
-
-
-	1337 //
-	ft_memset(&a , 42 , 1 );
-	printf("%d\n" , a);
-}

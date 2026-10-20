@@ -14,6 +14,5 @@
 
 void	ft_putchar_fd(char c, int fd)
 {
-	// check sign
 	write(fd, &c, 1);
 }
