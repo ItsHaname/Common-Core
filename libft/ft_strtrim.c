@@ -31,6 +31,8 @@ char	*ft_strtrim(char const *s1, char const *set)
 	size_t	debut;
 	size_t	fin;
 
+	if (s1 == NULL || set == NULL)
+		return (NULL);
 	debut = 0;
 	while (s1[debut] && in_set(s1[debut], set))
 		debut++;

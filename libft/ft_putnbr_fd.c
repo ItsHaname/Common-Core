@@ -18,6 +18,8 @@ void	ft_putnbr_fd(int n, int fd)
 	unsigned int	nbr;
 	int				i;
 
+	if (fd < 0)
+		return ;
 	if (n < 0)
 	{
 		nbr = -(unsigned int)n;
@@ -27,10 +29,7 @@ void	ft_putnbr_fd(int n, int fd)
 		nbr = (unsigned int)n;
 	i = 0;
 	if (n == 0)
-	{
-		tab[i] = '0';
-		i++;
-	}
+		tab[i++] = '0';
 	while (nbr > 0)
 	{
 		tab[i] = nbr % 10 + '0';
