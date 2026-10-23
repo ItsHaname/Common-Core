@@ -152,10 +152,5 @@ typedef struct s_list
 | `void ft_lstiter(t_list *lst, void (*f)(void *));` | Calls `f` on the `content` of each node. |
 | `t_list *ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));` | Makes a new list: each new node has the content `f(old content)`. The old list is not changed. If one `malloc` fails, frees the new list with `del` and returns `NULL`. |
 
-## Resources
-
-- `man 3` pages of the libc functions (`man strlcpy`, `man memmove`, ...)
-- [C documentation — cppreference](https://en.cppreference.com/w/c)
-- [Linked lists in C — GeeksforGeeks](https://www.geeksforgeeks.org/linked-list-data-structure/)
 
 All the code of the library was written by me, and I can explain each line.
