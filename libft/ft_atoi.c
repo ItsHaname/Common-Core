@@ -14,9 +14,9 @@
 
 int	ft_atoi(const char *nptr)
 {
-	int	signe;
-	int	resultat;
-	int	i;
+	int		signe;
+	long	resultat;
+	int		i;
 
 	signe = 1;
 	i = 0;
@@ -34,5 +34,5 @@ int	ft_atoi(const char *nptr)
 		resultat = resultat * 10 + (nptr[i] - '0');
 		i++;
 	}
-	return (signe * resultat);
+	return ((int)(signe * resultat));
 }
