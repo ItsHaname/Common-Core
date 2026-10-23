@@ -49,85 +49,112 @@ cc -Wall -Wextra -Werror main.c -L. -lft -o program
 
 ## Library description
 
-### Part 1 — libc functions
+The functions are grouped by **what they work on**. The column **Part** says where
+the function is in the subject:
 
-These functions work like the original ones (see `man 3 <name>`).
-The only difference is the `ft_` at the start of the name.
+- **Part 1**: my version of a `libc` function. Same prototype and same behavior as
+  the original (see `man 3 <name>`), only the name starts with `ft_`.
+- **Part 2**: extra functions asked by the subject.
+- **Part 3**: linked list functions.
 
-#### Check a character
+### 1. Characters
 
-All these functions return **1** if the character is in the class, and **0** if not.
+All the `is` functions return **1** if the character is in the class, and **0** if not.
 
-| Prototype | Behavior |
-|-----------|----------|
-| `int ft_isalpha(int c);` | `c` is a letter (`a-z` or `A-Z`) |
-| `int ft_isdigit(int c);` | `c` is a digit (`0-9`) |
-| `int ft_isalnum(int c);` | `c` is a letter or a digit |
-| `int ft_isascii(int c);` | `c` is an ASCII value (`0` to `127`) |
-| `int ft_isprint(int c);` | `c` is printable, space included (`32` to `126`) |
+| Part | Prototype | Behavior |
+|------|-----------|----------|
+| 1 | `int ft_isalpha(int c);` | `c` is a letter (`a-z` or `A-Z`) |
+| 1 | `int ft_isdigit(int c);` | `c` is a digit (`0-9`) |
+| 1 | `int ft_isalnum(int c);` | `c` is a letter or a digit |
+| 1 | `int ft_isascii(int c);` | `c` is an ASCII value (`0` to `127`) |
+| 1 | `int ft_isprint(int c);` | `c` is printable, space included (`32` to `126`) |
+| 1 | `int ft_toupper(int c);` | If `c` is a lowercase letter, returns the uppercase letter. Else returns `c` unchanged. |
+| 1 | `int ft_tolower(int c);` | If `c` is an uppercase letter, returns the lowercase letter. Else returns `c` unchanged. |
 
-#### Convert
+### 2. Strings: read, search and compare
 
-| Prototype | Behavior |
-|-----------|----------|
-| `int ft_toupper(int c);` | If `c` is a lowercase letter, returns the uppercase letter. Else returns `c` unchanged. |
-| `int ft_tolower(int c);` | If `c` is an uppercase letter, returns the lowercase letter. Else returns `c` unchanged. |
-| `int ft_atoi(const char *nptr);` | Changes the start of the string into an `int`. Skips white spaces (`' '`, `\t \n \v \f \r`), then reads one optional `+` or `-`, then reads digits. Stops at the first character that is not a digit. Returns `0` if there is no number. |
+These functions do **not** change the string and do **not** allocate memory.
 
-#### Strings
+| Part | Prototype | Behavior |
+|------|-----------|----------|
+| 1 | `size_t ft_strlen(const char *s);` | Returns the number of characters in `s`, without the final `'\0'`. |
+| 1 | `char *ft_strchr(const char *s, int c);` | Returns a pointer to the **first** `c` in `s`, or `NULL` if not found. `c` is changed to `char`. It can find the final `'\0'`. |
+| 1 | `char *ft_strrchr(const char *s, int c);` | Same as `ft_strchr`, but returns the **last** `c` in `s`. |
+| 1 | `int ft_strncmp(const char *s1, const char *s2, size_t n);` | Compares at most `n` characters (as `unsigned char`). Stops at the first difference or at `'\0'`. Returns `0` if equal, a negative number if `s1 < s2`, a positive number if `s1 > s2`. |
+| 1 | `char *ft_strnstr(const char *big, const char *little, size_t len);` | Looks for `little` in the first `len` characters of `big`. Returns a pointer to the start of `little` in `big`, or `NULL` if not found. If `little` is empty, returns `big`. Never reads more than `len` characters of `big`. |
 
-| Prototype | Behavior |
-|-----------|----------|
-| `size_t ft_strlen(const char *s);` | Returns the number of characters in `s`, without the final `'\0'`. |
-| `char *ft_strchr(const char *s, int c);` | Returns a pointer to the **first** `c` in `s`, or `NULL` if not found. `c` is changed to `char`. It can find the final `'\0'`. |
-| `char *ft_strrchr(const char *s, int c);` | Same as `ft_strchr`, but returns the **last** `c` in `s`. |
-| `int ft_strncmp(const char *s1, const char *s2, size_t n);` | Compares at most `n` characters (as `unsigned char`). Stops at the first difference or at `'\0'`. Returns `0` if equal, a negative number if `s1 < s2`, a positive number if `s1 > s2`. |
-| `char *ft_strnstr(const char *big, const char *little, size_t len);` | Looks for `little` in the first `len` characters of `big`. Returns a pointer to the start of `little` in `big`, or `NULL` if not found. If `little` is empty, returns `big`. Never reads more than `len` characters of `big`. |
-| `size_t ft_strlcpy(char *dst, const char *src, size_t size);` | Copies `src` into `dst`, at most `size - 1` characters, and always ends `dst` with `'\0'` (if `size > 0`). Returns the length of `src`. If the return value is `>= size`, the string was cut. |
-| `size_t ft_strlcat(char *dst, const char *src, size_t size);` | Adds `src` at the end of `dst`. `size` is the full size of the `dst` buffer. Ends `dst` with `'\0'` if there is space. Returns the length it tried to make: `strlen(dst) + strlen(src)`, or `size + strlen(src)` if `dst` was already `size` long or more. Never reads more than `size` bytes of `dst`. |
+### 3. Strings: copy into an existing buffer
 
-#### Memory
+The caller gives the buffer `dst` and its full size `size`. Nothing is allocated.
 
-These functions work on bytes. They do not stop at `'\0'`.
+| Part | Prototype | Behavior |
+|------|-----------|----------|
+| 1 | `size_t ft_strlcpy(char *dst, const char *src, size_t size);` | Copies `src` into `dst`, at most `size - 1` characters, and always ends `dst` with `'\0'` (if `size > 0`). Returns the length of `src`. If the return value is `>= size`, the string was cut. |
+| 1 | `size_t ft_strlcat(char *dst, const char *src, size_t size);` | Adds `src` at the end of `dst`. Ends `dst` with `'\0'` if there is space. Returns the length it tried to make: `strlen(dst) + strlen(src)`, or `size + strlen(src)` if `dst` was already `size` long or more. Never reads more than `size` bytes of `dst`. |
 
-| Prototype | Behavior |
-|-----------|----------|
-| `void *ft_memset(void *s, int c, size_t n);` | Fills the first `n` bytes of `s` with the byte `c` (changed to `unsigned char`). Returns `s`. |
-| `void ft_bzero(void *s, size_t n);` | Puts `0` in the first `n` bytes of `s`. |
-| `void *ft_memcpy(void *dest, const void *src, size_t n);` | Copies `n` bytes from `src` to `dest`. The two zones must not overlap. Returns `dest`. |
-| `void *ft_memmove(void *dest, const void *src, size_t n);` | Copies `n` bytes from `src` to `dest`. Works even if the two zones overlap (copies from the end when `dest > src`). Returns `dest`. |
-| `void *ft_memchr(const void *s, int c, size_t n);` | Looks for the byte `c` in the first `n` bytes of `s`. Returns a pointer to it, or `NULL`. |
-| `int ft_memcmp(const void *s1, const void *s2, size_t n);` | Compares the first `n` bytes (as `unsigned char`). Returns `0` if equal, else the difference of the first different bytes. |
+### 4. Strings: make a new string (with `malloc`)
 
-#### Allocation (with `malloc`)
+These functions return a **new** string allocated with `malloc` (the caller must
+`free()` it). They return `NULL` if `malloc` fails, or if a parameter is `NULL`
+(except `ft_split`, which works like a `libc` function: `s` must not be `NULL`).
 
-| Prototype | Behavior |
-|-----------|----------|
-| `void *ft_calloc(size_t nmemb, size_t size);` | Allocates an array of `nmemb` elements of `size` bytes, all set to `0`. If `nmemb` or `size` is `0`, returns a unique pointer that can be given to `free()`. Returns `NULL` if `nmemb * size` is too big (overflow) or if `malloc` fails. |
-| `char *ft_strdup(const char *s);` | Returns a new copy of `s`, allocated with `malloc`. Returns `NULL` if `malloc` fails. |
+| Part | Prototype | Behavior |
+|------|-----------|----------|
+| 1 | `char *ft_strdup(const char *s);` | Returns a copy of `s`. |
+| 2 | `char *ft_substr(char const *s, unsigned int start, size_t len);` | Returns the part of `s` that starts at index `start`, with at most `len` characters. If `start` is after the end of `s`, returns an empty string `""`. |
+| 2 | `char *ft_strjoin(char const *s1, char const *s2);` | Returns `s1` followed by `s2`. |
+| 2 | `char *ft_strtrim(char const *s1, char const *set);` | Returns a copy of `s1` without the characters of `set` at the start and at the end. Characters in the middle are kept. |
+| 2 | `char **ft_split(char const *s, char c);` | Cuts `s` into words, using `c` as separator. Returns a new array of new strings, ended by `NULL`. Empty words are not kept. If one `malloc` fails, frees everything already allocated and returns `NULL`. To free the result: `free()` each string, then `free()` the array. |
+| 2 | `char *ft_strmapi(char const *s, char (*f)(unsigned int, char));` | Returns a new string. Each character is the result of `f(index, character)`. `s` is not changed. |
 
-### Part 2 — Extra functions
+### 5. Strings: change in place
 
-The functions that return a new string use `malloc`. They return `NULL` if `malloc`
-fails, or if a string parameter is `NULL` (except `ft_split`).
+| Part | Prototype | Behavior |
+|------|-----------|----------|
+| 2 | `void ft_striteri(char *s, void (*f)(unsigned int, char *));` | Calls `f(index, &character)` on each character of `s`. `f` gets the address, so it can change `s` directly. Does nothing if `s` or `f` is `NULL`. |
 
-| Prototype | Behavior |
-|-----------|----------|
-| `char *ft_substr(char const *s, unsigned int start, size_t len);` | Returns a new string: the part of `s` that starts at index `start`, with at most `len` characters. If `start` is after the end of `s`, returns an empty string `""`. |
-| `char *ft_strjoin(char const *s1, char const *s2);` | Returns a new string: `s1` followed by `s2`. |
-| `char *ft_strtrim(char const *s1, char const *set);` | Returns a copy of `s1` without the characters of `set` at the start and at the end. Characters in the middle are kept. |
-| `char **ft_split(char const *s, char c);` | Cuts `s` into words, using `c` as separator. Returns a new array of new strings, ended by `NULL`. Empty words are not kept. If one `malloc` fails, frees everything already allocated and returns `NULL`. To free the result: `free()` each string, then `free()` the array. |
-| `char *ft_itoa(int n);` | Returns a new string with the number `n` written in base 10. Works with negative numbers and with `INT_MIN`. |
-| `char *ft_strmapi(char const *s, char (*f)(unsigned int, char));` | Returns a new string. Each character is the result of `f(index, character)`. `s` is not changed. |
-| `void ft_striteri(char *s, void (*f)(unsigned int, char *));` | Calls `f(index, &character)` on each character of `s`. `f` gets the address, so it can change `s` directly. Does nothing if `s` or `f` is `NULL`. |
-| `void ft_putchar_fd(char c, int fd);` | Writes the character `c` on the file descriptor `fd`. |
-| `void ft_putstr_fd(char *s, int fd);` | Writes the string `s` on `fd`. |
-| `void ft_putendl_fd(char *s, int fd);` | Writes the string `s` on `fd`, then a newline `'\n'`. |
-| `void ft_putnbr_fd(int n, int fd);` | Writes the number `n` on `fd`. Works with negative numbers and with `INT_MIN`. |
+### 6. Numbers: string <-> int
 
-The `_fd` functions do nothing if `fd < 0` or if the string is `NULL`.
+| Part | Prototype | Behavior |
+|------|-----------|----------|
+| 1 | `int ft_atoi(const char *nptr);` | String to `int`. Skips white spaces (`' '`, `\t \n \v \f \r`), then reads one optional `+` or `-`, then reads digits. Stops at the first character that is not a digit. Returns `0` if there is no number. |
+| 2 | `char *ft_itoa(int n);` | `int` to a new string (with `malloc`), in base 10. Works with negative numbers and with `INT_MIN`. Returns `NULL` if `malloc` fails. |
 
-### Part 3 — Linked lists
+### 7. Memory: raw bytes
+
+These functions work on **bytes** (`unsigned char`), on any type of data. They do
+**not** stop at `'\0'`: they always use `n`. They do not allocate memory: the zone
+can be on the stack, on the heap or in a global variable.
+Like in `libc`, giving `NULL` with `n > 0` is undefined behavior (it crashes, like the
+original). With `n == 0`, nothing is read or written.
+
+| Part | Prototype | Behavior |
+|------|-----------|----------|
+| 1 | `void *ft_memset(void *s, int c, size_t n);` | Fills the first `n` bytes of `s` with the byte `c` (changed to `unsigned char`). Returns `s`. |
+| 1 | `void ft_bzero(void *s, size_t n);` | Puts `0` in the first `n` bytes of `s`. |
+| 1 | `void *ft_memcpy(void *dest, const void *src, size_t n);` | Copies `n` bytes from `src` to `dest`. The two zones must not overlap. Returns `dest`. |
+| 1 | `void *ft_memmove(void *dest, const void *src, size_t n);` | Copies `n` bytes from `src` to `dest`. Works even if the two zones overlap: copies from the end when `dest > src`, from the start otherwise. Returns `dest`. |
+| 1 | `void *ft_memchr(const void *s, int c, size_t n);` | Looks for the byte `c` in the first `n` bytes of `s`. Returns a pointer to it, or `NULL`. |
+| 1 | `int ft_memcmp(const void *s1, const void *s2, size_t n);` | Compares the first `n` bytes (as `unsigned char`). Returns `0` if equal, else the difference of the first different bytes. |
+
+### 8. Memory: allocation
+
+| Part | Prototype | Behavior |
+|------|-----------|----------|
+| 1 | `void *ft_calloc(size_t nmemb, size_t size);` | Allocates (on the heap) an array of `nmemb` elements of `size` bytes, all set to `0`. If `nmemb` or `size` is `0`, returns a unique pointer that can be given to `free()`. Returns `NULL` if `nmemb * size` is too big (overflow) or if `malloc` fails. |
+
+### 9. Output on a file descriptor
+
+They write with `write()`. They do nothing if `fd < 0` or if the string is `NULL`.
+
+| Part | Prototype | Behavior |
+|------|-----------|----------|
+| 2 | `void ft_putchar_fd(char c, int fd);` | Writes the character `c` on `fd`. |
+| 2 | `void ft_putstr_fd(char *s, int fd);` | Writes the string `s` on `fd`. |
+| 2 | `void ft_putendl_fd(char *s, int fd);` | Writes the string `s` on `fd`, then a newline `'\n'`. |
+| 2 | `void ft_putnbr_fd(int n, int fd);` | Writes the number `n` on `fd`. Works with negative numbers and with `INT_MIN`. |
+
+### 10. Linked lists
 
 ```c
 typedef struct s_list
@@ -140,17 +167,42 @@ typedef struct s_list
 - `content`: the data of the node (`void *`, so it can be any type).
 - `next`: the address of the next node, or `NULL` for the last node.
 
-| Prototype | Behavior |
-|-----------|----------|
-| `t_list *ft_lstnew(void *content);` | Allocates a new node with `malloc`. `content` is set to the parameter, `next` is set to `NULL`. Returns the node, or `NULL` if `malloc` fails. |
-| `void ft_lstadd_front(t_list **lst, t_list *new);` | Adds the node `new` at the start of the list. `*lst` now points to `new`. |
-| `void ft_lstadd_back(t_list **lst, t_list *new);` | Adds the node `new` at the end of the list. If the list is empty, `*lst` becomes `new`. |
-| `int ft_lstsize(t_list *lst);` | Returns the number of nodes in the list (`0` if `lst` is `NULL`). |
-| `t_list *ft_lstlast(t_list *lst);` | Returns the last node of the list (`NULL` if `lst` is `NULL`). |
-| `void ft_lstdelone(t_list *lst, void (*del)(void *));` | Frees the `content` of one node with `del`, then frees the node. Does **not** free the next nodes. |
-| `void ft_lstclear(t_list **lst, void (*del)(void *));` | Frees the node `*lst` and all the nodes after it (with `del` and `free`). Then sets `*lst` to `NULL`. |
-| `void ft_lstiter(t_list *lst, void (*f)(void *));` | Calls `f` on the `content` of each node. |
-| `t_list *ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));` | Makes a new list: each new node has the content `f(old content)`. The old list is not changed. If one `malloc` fails, frees the new list with `del` and returns `NULL`. |
+#### Create and add
 
+| Part | Prototype | Behavior |
+|------|-----------|----------|
+| 3 | `t_list *ft_lstnew(void *content);` | Allocates a new node with `malloc`. `content` is set to the parameter, `next` is set to `NULL`. Returns the node, or `NULL` if `malloc` fails. |
+| 3 | `void ft_lstadd_front(t_list **lst, t_list *new);` | Adds the node `new` at the start of the list. `*lst` now points to `new`. |
+| 3 | `void ft_lstadd_back(t_list **lst, t_list *new);` | Adds the node `new` at the end of the list. If the list is empty, `*lst` becomes `new`. |
 
-All the code of the library was written by me, and I can explain each line.
+#### Read
+
+| Part | Prototype | Behavior |
+|------|-----------|----------|
+| 3 | `int ft_lstsize(t_list *lst);` | Returns the number of nodes in the list (`0` if `lst` is `NULL`). |
+| 3 | `t_list *ft_lstlast(t_list *lst);` | Returns the last node of the list (`NULL` if `lst` is `NULL`). |
+
+#### Free
+
+| Part | Prototype | Behavior |
+|------|-----------|----------|
+| 3 | `void ft_lstdelone(t_list *lst, void (*del)(void *));` | Frees the `content` of one node with `del`, then frees the node. Does **not** free the next nodes. |
+| 3 | `void ft_lstclear(t_list **lst, void (*del)(void *));` | Frees the node `*lst` and all the nodes after it (with `del` and `free`). Then sets `*lst` to `NULL`. |
+
+#### Apply a function
+
+| Part | Prototype | Behavior |
+|------|-----------|----------|
+| 3 | `void ft_lstiter(t_list *lst, void (*f)(void *));` | Calls `f` on the `content` of each node. |
+| 3 | `t_list *ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));` | Makes a new list: each new node has the content `f(old content)`. The old list is not changed. If one `malloc` fails, frees the new list with `del` and returns `NULL`. |
+
+## Resources
+
+- `man 3` pages of the libc functions (`man strlcpy`, `man memmove`, ...)
+- [C documentation — cppreference](https://en.cppreference.com/w/c)
+- [Linked lists in C — GeeksforGeeks](https://www.geeksforgeeks.org/linked-list-data-structure/)
+
+### How AI was used
+
+AI was used as a learning tool, to explain some concepts (memory, pointers, file
+descriptors, linked lists) and to check my work. I can explain each line of the code.
