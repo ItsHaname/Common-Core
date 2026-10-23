@@ -158,14 +158,4 @@ typedef struct s_list
 - [C documentation — cppreference](https://en.cppreference.com/w/c)
 - [Linked lists in C — GeeksforGeeks](https://www.geeksforgeeks.org/linked-list-data-structure/)
 
-### How AI was used
-
-- **To understand concepts**: I asked AI to explain some ideas, like memory overlap in
-  `memmove`, `strlcpy`/`strlcat` sizes, file descriptors and linked lists.
-- **To test**: AI helped me write test programs that compare my functions with the
-  real `libc` functions (normal cases, `NULL` cases, memory leaks, `malloc` failure).
-  These tests are not in the repository.
-- **To review**: AI pointed out some differences with `libc` (`ft_strlcat` and
-  `ft_strnstr` with `size`/`len` equal to `0`) and helped me write this README.
-
 All the code of the library was written by me, and I can explain each line.
